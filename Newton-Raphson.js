@@ -2,10 +2,10 @@ const readline = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-const Math = require("math");
+const math = require("mathjs");
 
 const f_x = (x) => {
-  return x ^ (2 - 16);
+  return x ** 2 - 16;
 };
 
 const df_x = (x) => {
@@ -14,20 +14,18 @@ const df_x = (x) => {
 
 let x_0;
 let aerr;
-let maxitr;
 let x_1;
 
-readline.question("Enter the initial Guess", (x) => {
-  x_0 = x;
-  readline.close();
+readline.question("Enter the initial Guess: ", (x) => {
+  x_0 = parseFloat(x);
+  readline.question("Enter the error: ", (error) => {
+    aerr = parseFloat(error);
+    readline.close();
+    console.log(`aerr: ${aerr}  initial_guess: ${x_0}`);
+    func(); // Call func after inputs are gathered
+    performNewtonRaphson();
+  });
 });
-
-readline.question("Enter the error", (x) => {
-  aerr = x;
-  readline.close();
-});
-
-console.log(`aerr: ${aerr}  initial_guess: ${x_0}`);
 
 const func = () => {
   const h = () => {
@@ -36,9 +34,15 @@ const func = () => {
 
   x_1 = x_0 - h();
 };
-func();
 
-for (let i = 0; i <= 1000; i++) {
-  if (Math.abs(h()) >= aerr) console.log(x_0, f_x(x_0));
-  else func();
-}
+const performNewtonRaphson = () => {
+  for (let i = 0; i <= 1000; i++) {
+    if (Math.abs(f_x(x_0)) >= aerr) {
+      console.log(`Iteration ${i}: x = ${x_0}, f(x) = ${f_x(x_0)}`);
+    } else {
+      break;
+    }
+    func();
+    x_0 = x_1;
+  }
+};
