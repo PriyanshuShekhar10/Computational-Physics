@@ -29,6 +29,7 @@ const step_increment = () => {
   let x = 0;
   while (x < 100) {
     console.log(`Integral for Step ${x + 1}: ${integration()}`);
+
     x++;
     number_of_steps++;
   }
