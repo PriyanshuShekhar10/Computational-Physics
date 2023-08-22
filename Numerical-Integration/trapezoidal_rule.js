@@ -6,7 +6,6 @@ const f_x = (x) => {
 
 let lower_bound = 0.2;
 let upper_bound = 1.4;
-let integral = [];
 
 let number_of_steps = 2;
 
