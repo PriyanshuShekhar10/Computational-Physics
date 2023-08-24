@@ -16,7 +16,7 @@ const integration = () => {
   const variable_sum = () => {
     let sum = 0;
     for (let i = 1; i < number_of_steps; i++) {
-      sum = sum + f_x(lower_bound + i * step_size);
+      sum += f_x(lower_bound + i * step_size);
     }
     return sum;
   };
